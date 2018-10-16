@@ -18,7 +18,7 @@
 int myIntegerArray[] = {1, 2, 3, 4, 5};
 String myStringArray[] = {"whatever", "we", "want"};
 
-//creats an empty array with four slots to put into it: {0, 0, 0, 0}
+//creates an empty array with four slots to put into it: {0, 0, 0, 0}
 int newArray[] = new int[4];
 
 int newIntegerArray[] = new int[100];
