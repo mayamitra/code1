@@ -2,33 +2,41 @@
 //USE PROBABILITY TO DISPLAY TEXT FROM YOUR STRING ARAY
 
 String myFarm = "My farm has ";
-String farmAnimals[] = {" ", "cows", "pigs", "goats", "dogs", "ponies"};
+int numAnimals = 5; 
+float r[] = new float[numAnimals]; 
+String farmAnimals[] = {"cows", "pigs", "goats", "dogs", "ponies"};
+String index[] = new String[numAnimals];
 
 
 //20% chance of each animal being displayed.
 void setup() {
-  float r = random(0, 1);
-  for (int i=0; i<1; i+=r) {
-    println(myFarm); 
-
-    if (r<.2) {
-      i=1;
+  size(600, 600);
+  for (int i = 0; i<numAnimals; i++) {
+    r[i] = random(0, 1); 
+    println(r[i]);
+  }
+  for (int i = 0; i<numAnimals; i++) {
+    if (r[i]<.2) {
+      index[i]=farmAnimals[0];// = 0
     }
-    if (r>.2 && r<.4) {
-      i=2;
+    if (r[i]>.2 && r[i]<.4) {
+      index[i]=farmAnimals[2];
     }
-    if (r>.4 && r<.6) {
-      i=3;
+    if (r[i]>.4 && r[i]<.6) {
+      index[i]=farmAnimals[3];
     }
-    if (r>.6 && r<.8) {
-      i=4;
+    if (r[i]>.6 && r[i]<.8) {
+      index[i]=farmAnimals[4];
     }
-    if (r>.8 && r<1) {
-      i=5;
+    if (r[i]>.8 && r[i]<1) {
+      index[i]=farmAnimals[4];
     }
-    println(farmAnimals[i]);
   }
 }
 
 void draw() {
+  for (int i=0; i<numAnimals; i++) {
+    text(myFarm, 100, 80);
+    text(index[i], 10+(i*50), 100);
+  }
 }
