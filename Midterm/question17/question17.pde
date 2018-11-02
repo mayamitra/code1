@@ -19,13 +19,11 @@ void draw() {
     for (int j = 0; j < gridH; j++) {
       greyColors[i][j]+=1;
 
-
       if (greyColors[i][j] >= 255) {
         greyColors[i][j] = 0;
       }
 
       fill(greyColors[i][j]);
-
 
       rect(i*sizeW, j*sizeH, sizeW, sizeH);
     }
