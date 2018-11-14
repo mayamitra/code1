@@ -5,7 +5,7 @@ ArrayList<Person> people;
 
 void setup() {
   size(600, 600);
-  //noStroke();
+  noStroke();
   for (int i=0; i<city.length; i++) {
     city[i] = new Building(int(random(0, 550)), random(100, 300), random(40, 100));
   }
@@ -24,6 +24,7 @@ void draw() {
   text("Welcome to the city!", 100, 50);
 
   for (int i=0; i<city.length; i++) {
+    noStroke();
     city[i].display(i*10, color(50, i*50, 70));
   }
 
@@ -31,6 +32,7 @@ void draw() {
     Person p = people.get(i);
     p.move();
     p.accelerate();
+    stroke(0);
     p.display(70);
 
     if (p.position.x > width) {
