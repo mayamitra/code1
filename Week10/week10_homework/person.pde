@@ -6,6 +6,7 @@ class Person {
   
   PVector position;
   PVector velocity;
+  PVector acceleration;
   
   //constructor
   Person(float _headCenterX, float _headCenterY) {
@@ -15,11 +16,16 @@ class Person {
     
     position = new PVector (mouseX, mouseY);
     velocity = new PVector(random(1.5, 3), 0);
+    acceleration = new PVector(random(.1, .5), 0);
   }
 
   //methods
   void move() {
     position.add(velocity);
+  }
+  
+  void accelerate(){
+    velocity.add(acceleration);
   }
   
   void display(float personHeight) {

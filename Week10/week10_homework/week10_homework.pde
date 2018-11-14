@@ -30,6 +30,7 @@ void draw() {
   for (int i=0; i<people.size(); i++) {
     Person p = people.get(i);
     p.move();
+    p.accelerate();
     p.display(70);
     p.walk();
   }
