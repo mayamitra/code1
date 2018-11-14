@@ -2,6 +2,7 @@
 //Building joe;
 
 Building city[] = new Building [4];
+Building city2[] ;
 
 void setup() {
   size(600, 600);
@@ -11,6 +12,9 @@ void setup() {
   for (int i=0; i<city.length; i++){
     city[i] = new Building(int(random(0, 550)), random(100, 300), random(40, 100));
   }
+  
+  //if I want to make the array shorter, I can do this. To make it bigger, use append
+  //city2 = shorten(city);
 }
 
 void draw() {
