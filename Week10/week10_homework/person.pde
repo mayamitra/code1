@@ -1,19 +1,13 @@
 class Person {
   //data
-  float headCenterX;
-  float headCenterY;
   float personHeight;
-  
+
   PVector position;
   PVector velocity;
   PVector acceleration;
-  
+
   //constructor
-  Person(float _headCenterX, float _headCenterY) {
-    headCenterX = _headCenterX;
-    headCenterY = _headCenterY;
-    //personHeight = _personHeight;
-    
+  Person() {
     position = new PVector (mouseX, mouseY);
     velocity = new PVector(random(1.5, 3), 0);
     acceleration = new PVector(random(.1, .5), 0);
@@ -23,26 +17,22 @@ class Person {
   void move() {
     position.add(velocity);
   }
-  
-  void accelerate(){
+
+  void accelerate() {
     velocity.add(acceleration);
   }
-  
-  void display(float personHeight) {
-  fill(0);
-  //head
-  ellipse(headCenterX, headCenterY, 20, 20);
-  //body
-  line(headCenterX, headCenterY, headCenterX, headCenterY+personHeight);
-  //arms
-  line(headCenterX-20, headCenterY+(personHeight/2), headCenterX+20, headCenterY+(personHeight/2));
-  //legs
-  line(headCenterX, headCenterY+personHeight, headCenterX-20, headCenterY+personHeight+20);
-  line(headCenterX, headCenterY+personHeight, headCenterX+20, headCenterY+personHeight+20);
-}
 
-void walk(){
-  headCenterX+= velocity.x;
-}
+  void display(float personHeight) {
+    fill(0);
+    //head
+    ellipse(position.x, position.y, 20, 20);
+    //body
+    line(position.x, position.y, position.x, position.y+personHeight);
+    //arms
+    line(position.x-20, position.y+(personHeight/2), position.x+20, position.y+(personHeight/2));
+    //legs
+    line(position.x, position.y+personHeight, position.x-20, position.y+personHeight+20);
+    line(position.x, position.y+personHeight, position.x+20, position.y+personHeight+20);
+  }
 
 }

@@ -32,10 +32,17 @@ void draw() {
     p.move();
     p.accelerate();
     p.display(70);
-    p.walk();
+
+    if (p.position.x > width) {
+      people.remove(i);
+    }
   }
+
+  println(people.size());
 }
 
-void mousePressed(){
-  people.add(new Person(mouseX, mouseY));
+void mousePressed() {
+  if(mouseY> 400 && mouseY<= height){
+  people.add(new Person());
+}
 }
