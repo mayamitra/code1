@@ -19,16 +19,16 @@ void draw() {
   //OR theta = frameCount;
 
   //MOVE IN AN ORBIT:
-  //position.x = width/2 + orbitSize*cos(theta);
-  //position.y = height/2 + orbitSize*sin(theta);
+  position.x = width/2 + orbitSize*cos(theta);
+  position.y = height/2 + orbitSize*sin(theta);
 
   //WAVE MOVEMENT LEFT TO RIGHT:
   //position.x ++;
   //position.y = height/2 + orbitSize*sin(theta);
 
-  //WAVE MOVEMENT TOP TO BOTTOM:
-  position.x = width/2 + orbitSize*cos(theta);
-  position.y ++;
+  ////WAVE MOVEMENT TOP TO BOTTOM:
+  //position.x = width/2 + orbitSize*cos(theta);
+  //position.y ++;
   
   //MAKE IT COME BACK TO THE TOP IF IT GOES PAST (WITH TOP TO BOTTOM)
   //if (position.y >= height){
@@ -36,14 +36,14 @@ void draw() {
   //}
   
   //MAKE IT BOUNCE UP ONCE IT REACHES THE BOTTOM (WITH TOP TO BOTTOM)
-  position.y += yIncrement;
-  if ( position.y >= height-(radius/2)){
-    yIncrement = -5;
-  }
+  //position.y += yIncrement;
+  //if ( position.y >= height-(radius/2)){
+  //  yIncrement = -5;
+  //}
   
-  if ( position.y <= radius/2){
-   yIncrement = 5; 
-  }
+  //if ( position.y <= radius/2){
+  // yIncrement = 5; 
+  //}
 
   ellipse(position.x, position.y, 50, 50);
 }
