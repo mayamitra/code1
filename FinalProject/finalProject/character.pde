@@ -7,28 +7,8 @@ class Character {
   }
 
   //METHODS
-  void up1() {
-    //position.y = mouseY;
-    if (keyPressed == true) {
-      if (key == CODED) {
-        if (keyCode == UP) {
-          position.y -= 5;
-        }
-      }
-    }
-  }
-
-  void down1() {
-    if (keyPressed == true) {
-      if (key ==CODED) {
-        if (keyCode == DOWN) {
-          position.y += 5;
-        }
-      }
-    }
-  }
   
-    void up2() {
+  void up1() {
     //position.y = mouseY;
     if (keyPressed == true) {
       if (key == CODED) {
@@ -39,7 +19,7 @@ class Character {
     }
   }
 
-  void down2() {
+  void down1() {
     if (keyPressed == true) {
       if (key == CODED) {
         if (keyCode == CONTROL) {
@@ -48,6 +28,28 @@ class Character {
       }
     }
   }
+  void up2() {
+    //position.y = mouseY;
+    if (keyPressed == true) {
+      if (key == CODED) {
+        if (keyCode == UP) {
+          position.y -= 5;
+        }
+      }
+    }
+  }
+
+  void down2() {
+    if (keyPressed == true) {
+      if (key ==CODED) {
+        if (keyCode == DOWN) {
+          position.y += 5;
+        }
+      }
+    }
+  }
+  
+    
 
   void display() {
     rectMode(CENTER);

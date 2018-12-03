@@ -1,67 +1,113 @@
 // Kind of like table tennis but with two player characters throwing fireballs at each other
 // Score board
 
-//MAYA! SWITCH TO ARRAYLIST :)
-
 //player
 //ball
 //collision detection
 //score
 //lives
-//timer
+
+ArrayList <Ball1> balls1; 
+ArrayList <Ball2> balls2;
 
 int lives1;
 int lives2;
 
 Character player1;
 Character player2;
-Ball ball1;
-Ball ball2;
 
 float startTime;
 float ellapsedTime;
-
 
 PVector playPos [] = new PVector [2];
 
 void setup() {
   size(800, 600);
-  lives1 = 5;
-  lives2 = 5;
+
+  balls1 = new ArrayList<Ball1>();
+  balls2 = new ArrayList<Ball2>();
+
+  lives1 = 10;
+  lives2 = 10;
   playPos[0] = new PVector (100, height/2);
   playPos[1] = new PVector (width-100, height/2);
   player1 = new Character(playPos[0]);
   player2 = new Character(playPos[1]);
-  ball1 = new Ball(player1.position.x-24, player1.position.y);
-  ball2 = new Ball(player2.position.x+24, player2.position.y);
 }
 
 void draw() {
   background(0);
+
+  //FOR CHARACTER1 AND BALL1
   player1.up1();
   player1.down1();
   player1.display();
 
+  for (int i=0; i<balls1.size(); i++) {
+    Ball1 b1 = balls1.get(i);
+    b1.display();
+    b1.move();
+
+    if (b1.position.y >= height-(b1.size/2) || b1.position.y < b1.size/2) {
+      b1.bounceY();
+    }
+
+    //need to check if the ball position is within the bounds of the character
+    if (b1.position.x >= player2.position.x-24 &&
+      b1.position.x <= player2.position.x+24 &&
+      b1.position.y >= player2.position.y-(114/2) &&
+      b1.position.y <= player2.position.y+(114/2)) {
+      lives2 = lives2-=1;
+      balls1.remove(i);
+    }
+  }
+
+  //Score of Character 2, based on Ball 1
+  String printScore1 = ("Lives: " + lives2);
+  text(printScore1, 700, 20);
+
+
+  //FOR CHARACTER2 AND BALL2
   player2.up2();
   player2.down2();
   player2.display();
 
-  ball1.display();
-  ball1.move();
+  for (int i=0; i<balls2.size(); i++) {
+    Ball2 b2 = balls2.get(i);
+    b2.display();
+    b2.move();
 
-  if (ball1.y >= height-(ball1.size/2) || ball1.y < ball1.size/2) {
-    ball1.bounceY();
+    if (b2.position.y >= height-(b2.size/2) || b2.position.y < b2.size/2) {
+      b2.bounceY();
+    }
+
+    //need to check if the ball position is within the bounds of the character   
+    if (b2.position.x <= player1.position.x+24 && 
+      b2.position.x >= player1.position.x-24 &&
+      b2.position.y >= player1.position.y-(114/2) &&
+      b2.position.y <= player1.position.y+(114/2)) {
+      lives1 = lives1-=1;
+      balls2.remove(i);
+    }
   }
 
-  //need to check if the ball position is within the bounds of the character
-  if (ball1.x >= player2.position.x-(5+(ball2.size/2)) && 
-    ball1.y >= player2.position.y-(114/2) &&
-    ball1.y <= player2.position.y+(114/2)) {
-    lives1 = lives1-=1;
-    //ball.remove(); //MAKE THIS A THING WITH ARRAYLIST
-  }
-
-  //Score
-  String printScore = ("Lives: " + lives1);
-  text(printScore, 20, 20);
+  //Score of Character 1, based on Ball 2
+  String printScore2 = ("Lives: " + lives1);
+  text(printScore2, 20, 20);
 }
+
+//CREATING BALL1
+void mousePressed() {
+  balls1.add(new Ball1());
+}
+
+//CREATING BALL2
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == LEFT) {
+      balls2.add(new Ball2());
+    }
+  }
+}
+
+//If lives=0, print: game over
