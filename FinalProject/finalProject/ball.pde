@@ -7,7 +7,7 @@ class Ball1 {
   //CONSTRUCTOR
   Ball1() {
     position = new PVector(player1.position.x+24, player1.position.y);
-    velocity = new PVector (random(1, 2), random(1, 2));
+    velocity = new PVector (random(2, 3), random(2, 3));
     acceleration = new PVector(.1, 0);
     size = 15; 
   }
@@ -16,7 +16,8 @@ class Ball1 {
 
   //display
   void display() {
-    fill(255, 0, 0);
+    //flash like fireball
+    fill(255, random(0, 255), 0);
     ellipse(position.x, position.y, size, size);
   }
 

@@ -1,6 +1,5 @@
-// Kind of like table tennis but with two player characters throwing fireballs at each other
+// Two players throw fireballs at each other. Lives start at 10 and go down each time a player is hit.
 // Score board
-
 //player
 //ball
 //collision detection
@@ -16,28 +15,37 @@ int lives2;
 Character player1;
 Character player2;
 
-float startTime;
-float ellapsedTime;
+Star stars[] = new Star[20];
 
 PVector playPos [] = new PVector [2];
 
 void setup() {
   size(800, 600);
+  noStroke();
 
   balls1 = new ArrayList<Ball1>();
   balls2 = new ArrayList<Ball2>();
 
   lives1 = 10;
   lives2 = 10;
+  
   playPos[0] = new PVector (100, height/2);
   playPos[1] = new PVector (width-100, height/2);
   player1 = new Character(playPos[0]);
   player2 = new Character(playPos[1]);
+    
+  for (int i=0; i<stars.length; i++){
+    stars[i] = new Star(random(0, width), random(0, height), 5, 10);
+  }
 }
 
 void draw() {
-  background(0);
-
+  //BACKGROUND
+  background(0, 0, 75);
+  for (int i=0; i<stars.length; i++){
+    stars[i].display();
+  }
+  
   //FOR CHARACTER1 AND BALL1
   player1.up1();
   player1.down1();
@@ -64,8 +72,17 @@ void draw() {
 
   //Score of Character 2, based on Ball 1
   String printScore1 = ("Lives: " + lives2);
+  fill(255);
+  textSize(20);
   text(printScore1, 700, 20);
-
+  
+  //If Character 1's lives1 = 0, print "Game Over"
+  if (lives1 <= 0) {
+    String player1Loss = ("Game over! Player 2 Wins");
+    fill(255);
+    textSize(50);
+    text(player1Loss, 100, 100);
+  }
 
   //FOR CHARACTER2 AND BALL2
   player2.up2();
@@ -93,7 +110,17 @@ void draw() {
 
   //Score of Character 1, based on Ball 2
   String printScore2 = ("Lives: " + lives1);
+  fill(255);
+  textSize(20);
   text(printScore2, 20, 20);
+  
+  //If Character 2's lives2 = 0, print "Game Over"
+  if (lives2 <= 0) {
+    String player2Loss = ("Game over! Player 1 Wins");
+    fill(255);
+    textSize(50);
+    text(player2Loss, 100, 100);
+  }
 }
 
 //CREATING BALL1
@@ -109,5 +136,3 @@ void keyPressed() {
     }
   }
 }
-
-//If lives=0, print: game over
