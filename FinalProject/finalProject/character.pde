@@ -7,24 +7,20 @@ class Character {
   }
 
   //METHODS
-  
+
   void up1() {
     //position.y = mouseY;
     if (keyPressed == true) {
-      if (key == CODED) {
-        if (keyCode == SHIFT) {
-          position.y -= 5;
-        }
+      if (key == 'W' || key == 'w') {
+        position.y -= 5;
       }
     }
   }
 
   void down1() {
     if (keyPressed == true) {
-      if (key == CODED) {
-        if (keyCode == CONTROL) {
-          position.y += 5;
-        }
+      if (key == 'S' || key == 's') {
+        position.y += 5;
       }
     }
   }
@@ -48,8 +44,6 @@ class Character {
       }
     }
   }
-  
-    
 
   void display() {
     rectMode(CENTER);

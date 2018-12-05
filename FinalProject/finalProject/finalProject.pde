@@ -28,13 +28,13 @@ void setup() {
 
   lives1 = 10;
   lives2 = 10;
-  
+
   playPos[0] = new PVector (100, height/2);
   playPos[1] = new PVector (width-100, height/2);
   player1 = new Character(playPos[0]);
   player2 = new Character(playPos[1]);
-    
-  for (int i=0; i<stars.length; i++){
+
+  for (int i=0; i<stars.length; i++) {
     stars[i] = new Star(random(0, width), random(0, height), 5, 10);
   }
 }
@@ -42,10 +42,10 @@ void setup() {
 void draw() {
   //BACKGROUND
   background(0, 0, 75);
-  for (int i=0; i<stars.length; i++){
+  for (int i=0; i<stars.length; i++) {
     stars[i].display();
   }
-  
+
   //FOR CHARACTER1 AND BALL1
   player1.up1();
   player1.down1();
@@ -75,7 +75,7 @@ void draw() {
   fill(255);
   textSize(20);
   text(printScore1, 700, 20);
-  
+
   //If Character 1's lives1 = 0, print "Game Over"
   if (lives1 <= 0) {
     String player1Loss = ("Game over! Player 2 Wins");
@@ -113,7 +113,7 @@ void draw() {
   fill(255);
   textSize(20);
   text(printScore2, 20, 20);
-  
+
   //If Character 2's lives2 = 0, print "Game Over"
   if (lives2 <= 0) {
     String player2Loss = ("Game over! Player 1 Wins");
@@ -123,13 +123,14 @@ void draw() {
   }
 }
 
-//CREATING BALL1
-void mousePressed() {
-  balls1.add(new Ball1());
-}
 
-//CREATING BALL2
 void keyPressed() {
+  //CREATING BALL1
+  if (key == 'D' || key == 'd') {
+    balls1.add(new Ball1());
+  }
+  
+  //CREATING BALL2
   if (key == CODED) {
     if (keyCode == LEFT) {
       balls2.add(new Ball2());
