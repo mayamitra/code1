@@ -46,10 +46,10 @@ class Character {
   }
 
   void display() {
-    rectMode(CENTER);
-    fill(255, 255, 0);
+    rectMode(CENTER);  
+    fill(0, 255, 0);
     //head
-    rect(position.x, position.y, 26, 26);
+    ellipse(position.x, position.y, 30, 35);
     //neck
     rect(position.x, position.y+18, 10, 10);
     //left arm
@@ -66,5 +66,15 @@ class Character {
     rect(position.x-10, position.y+86, 12, 30);
     //right leg
     rect(position.x+10, position.y+86, 12, 30);
+    fill(0, 255, 0);
+    //left foot
+    ellipse(position.x-10, position.y+104, 16, 6);
+    //right foot
+    ellipse(position.x+10, position.y+104, 16, 6);
+    fill(0);
+    //left eye
+    ellipse(position.x-7, position.y, 8, 8);
+    //right eye
+    ellipse(position.x+7, position.y, 8, 8);
   }
 }

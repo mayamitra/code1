@@ -1,9 +1,8 @@
-// Two players throw fireballs at each other. Lives start at 10 and go down each time a player is hit.
-// Score board
+// Two aliens throw fireballs at each other. Lives start at 10 and go down each time a player is hit.
+//Elements: 
 //player
 //ball
 //collision detection
-//score
 //lives
 
 ArrayList <Ball1> balls1; 
@@ -51,6 +50,14 @@ void draw() {
   player1.down1();
   player1.display();
 
+  //falling off screen
+  if (player1.position.y > height) {
+    player1.position.y = 0;
+  }
+  if (player1.position.y < 0) {
+    player1.position.y = height;
+  }
+
   for (int i=0; i<balls1.size(); i++) {
     Ball1 b1 = balls1.get(i);
     b1.display();
@@ -58,6 +65,7 @@ void draw() {
 
     if (b1.position.y >= height-(b1.size/2) || b1.position.y < b1.size/2) {
       b1.bounceY();
+      b1.accelerate();
     }
 
     //need to check if the ball position is within the bounds of the character
@@ -89,6 +97,14 @@ void draw() {
   player2.down2();
   player2.display();
 
+  //falling off screen
+  if (player2.position.y > height) {
+    player2.position.y = 0;
+  }
+  if (player2.position.y < 0) {
+    player2.position.y = height;
+  }
+
   for (int i=0; i<balls2.size(); i++) {
     Ball2 b2 = balls2.get(i);
     b2.display();
@@ -96,6 +112,7 @@ void draw() {
 
     if (b2.position.y >= height-(b2.size/2) || b2.position.y < b2.size/2) {
       b2.bounceY();
+      b2.accelerate();
     }
 
     //need to check if the ball position is within the bounds of the character   
@@ -123,13 +140,12 @@ void draw() {
   }
 }
 
-
 void keyPressed() {
   //CREATING BALL1
   if (key == 'D' || key == 'd') {
     balls1.add(new Ball1());
   }
-  
+
   //CREATING BALL2
   if (key == CODED) {
     if (keyCode == LEFT) {
