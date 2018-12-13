@@ -1,3 +1,6 @@
+import processing.sound.*;
+PFont font;
+
 // Two aliens throw fireballs at each other. Lives start at 10 and go down each time a player is hit.
 //Elements: 
 //player
@@ -11,12 +14,18 @@ ArrayList <Ball2> balls2;
 int lives1;
 int lives2;
 
+import processing.sound.*;
+
+SoundFile file;
+
 Character player1;
 Character player2;
 
 Star stars[] = new Star[20];
 
 PVector playPos [] = new PVector [2];
+
+boolean hit;
 
 void setup() {
   size(800, 600);
@@ -36,6 +45,10 @@ void setup() {
   for (int i=0; i<stars.length; i++) {
     stars[i] = new Star(random(0, width), random(0, height), 5, 10);
   }
+
+  file = new SoundFile(this, "boomSound.mp3");
+  font = createFont("Bungee-Regular.otf", 15);
+  
 }
 
 void draw() {
@@ -62,6 +75,7 @@ void draw() {
     Ball1 b1 = balls1.get(i);
     b1.display();
     b1.move();
+    b1.accelerateSlow();
 
     if (b1.position.y >= height-(b1.size/2) || b1.position.y < b1.size/2) {
       b1.bounceY();
@@ -71,25 +85,29 @@ void draw() {
     //need to check if the ball position is within the bounds of the character
     if (b1.position.x >= player2.position.x-24 &&
       b1.position.x <= player2.position.x+24 &&
-      b1.position.y >= player2.position.y-(114/2) &&
-      b1.position.y <= player2.position.y+(114/2)) {
+      b1.position.y >= player2.position.y-18 &&
+      b1.position.y <= player2.position.y+107) {
       lives2 = lives2-=1;
       balls1.remove(i);
+      player2.shirtChange();
+      file.play();
     }
   }
 
   //Score of Character 2, based on Ball 1
   String printScore1 = ("Lives: " + lives2);
+  textFont(font);
   fill(255);
   textSize(20);
-  text(printScore1, 700, 20);
+  text(printScore1, 670, 20);
 
   //If Character 1's lives1 = 0, print "Game Over"
   if (lives1 <= 0) {
     String player1Loss = ("Game over! Player 2 Wins");
+    textFont(font);
     fill(255);
     textSize(50);
-    text(player1Loss, 100, 100);
+    text(player1Loss, 30, 100);
   }
 
   //FOR CHARACTER2 AND BALL2
@@ -109,6 +127,8 @@ void draw() {
     Ball2 b2 = balls2.get(i);
     b2.display();
     b2.move();
+    b2.accelerateSlow();
+
 
     if (b2.position.y >= height-(b2.size/2) || b2.position.y < b2.size/2) {
       b2.bounceY();
@@ -118,15 +138,18 @@ void draw() {
     //need to check if the ball position is within the bounds of the character   
     if (b2.position.x <= player1.position.x+24 && 
       b2.position.x >= player1.position.x-24 &&
-      b2.position.y >= player1.position.y-(114/2) &&
-      b2.position.y <= player1.position.y+(114/2)) {
+      b2.position.y >= player1.position.y-18 &&
+      b2.position.y <= player1.position.y+107) {
       lives1 = lives1-=1;
       balls2.remove(i);
+      player1.shirtChange();
+      file.play();
     }
   }
 
   //Score of Character 1, based on Ball 2
   String printScore2 = ("Lives: " + lives1);
+  textFont(font);
   fill(255);
   textSize(20);
   text(printScore2, 20, 20);
@@ -134,9 +157,10 @@ void draw() {
   //If Character 2's lives2 = 0, print "Game Over"
   if (lives2 <= 0) {
     String player2Loss = ("Game over! Player 1 Wins");
+    textFont(font);
     fill(255);
     textSize(50);
-    text(player2Loss, 100, 100);
+    text(player2Loss, 30, 100);
   }
 }
 

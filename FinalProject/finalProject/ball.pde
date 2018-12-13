@@ -2,6 +2,7 @@ class Ball1 {
   PVector position;
   PVector velocity;
   PVector acceleration;
+  PVector accelerateSlow;
   int size;
 
   //CONSTRUCTOR
@@ -9,6 +10,7 @@ class Ball1 {
     position = new PVector(player1.position.x+24, player1.position.y);
     velocity = new PVector (random(1, 5), random(0, 5));
     acceleration = new PVector(.1, 0);
+    accelerateSlow = new PVector (.03, 0);
     size = 25; 
   }
   
@@ -29,6 +31,11 @@ class Ball1 {
   //accelerate
   void accelerate(){
     velocity.add(acceleration);
+  }
+  
+  //accelerate slow
+  void accelerateSlow(){
+    velocity.add(accelerateSlow);
   }
   
   //bounce walls

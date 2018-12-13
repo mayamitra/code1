@@ -1,5 +1,8 @@
 class Character {
   PVector position;
+  int colorR;
+  int colorG;
+  int colorB;
 
   //CONSTRUCTOR
   Character(PVector _position) {
@@ -44,8 +47,20 @@ class Character {
       }
     }
   }
+  
+  void shirtChange(){
+    colorR = 255;
+    colorG = 0;
+    colorB = 0;
+  }
 
-  void display() {
+  void display() {  
+
+    colorR = 0;
+    colorG = 0;
+    colorB = 255;
+    
+    //put parameter for shirt color and change variable whenever it's hit
     rectMode(CENTER);  
     fill(0, 255, 0);
     //head
@@ -57,7 +72,8 @@ class Character {
     //right arm
     rect(position.x+21, position.y+44, 6, 42);
     //body
-    fill(0, 0, 255);
+    //fill(0, 0, 255);
+    fill(colorR, colorG, colorB);
     rect(position.x, position.y+44, 36, 42);
     //midrif
     fill(150);
