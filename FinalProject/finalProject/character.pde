@@ -3,6 +3,7 @@ class Character {
   int colorR;
   int colorG;
   int colorB;
+  color shirt;
 
   //CONSTRUCTOR
   Character(PVector _position) {
@@ -54,8 +55,7 @@ class Character {
     colorB = 0;
   }
 
-  void display() {  
-
+  void display(color shirt) {  
     colorR = 0;
     colorG = 0;
     colorB = 255;
@@ -73,7 +73,8 @@ class Character {
     rect(position.x+21, position.y+44, 6, 42);
     //body
     //fill(0, 0, 255);
-    fill(colorR, colorG, colorB);
+    //fill(colorR, colorG, colorB);
+    fill(shirt);
     rect(position.x, position.y+44, 36, 42);
     //midrif
     fill(150);

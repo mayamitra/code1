@@ -1,12 +1,12 @@
+// Two aliens throw fireballs at each other. 
+//Lives start at 10 and go down each time a player is hit.
+
+import ddf.minim.*;
+Minim minim;
+AudioPlayer player;
+
 import processing.sound.*;
 PFont font;
-
-// Two aliens throw fireballs at each other. Lives start at 10 and go down each time a player is hit.
-//Elements: 
-//player
-//ball
-//collision detection
-//lives
 
 ArrayList <Ball1> balls1; 
 ArrayList <Ball2> balls2;
@@ -25,7 +25,7 @@ Star stars[] = new Star[20];
 
 PVector playPos [] = new PVector [2];
 
-boolean hit;
+boolean hit1;
 
 void setup() {
   size(800, 600);
@@ -47,8 +47,10 @@ void setup() {
   }
 
   file = new SoundFile(this, "boomSound.mp3");
+  minim = new Minim(this);
+  player = minim.loadFile("spaceMusic.mp3");
+  player.play();
   font = createFont("Bungee-Regular.otf", 15);
-  
 }
 
 void draw() {
@@ -56,12 +58,12 @@ void draw() {
   background(0, 0, 75);
   for (int i=0; i<stars.length; i++) {
     stars[i].display();
-  }
+  }  
 
   //FOR CHARACTER1 AND BALL1
   player1.up1();
   player1.down1();
-  player1.display();
+  player1.display(color(0, 0, 255));
 
   //falling off screen
   if (player1.position.y > height) {
@@ -89,9 +91,15 @@ void draw() {
       b1.position.y <= player2.position.y+107) {
       lives2 = lives2-=1;
       balls1.remove(i);
-      player2.shirtChange();
+      //player2.shirtChange();
+      //player2.display(color(255,0,0));
+      hit1 = true;
       file.play();
     }
+  }
+
+  if (hit1 == true) {
+    player2.display(color(255,0,0));
   }
 
   //Score of Character 2, based on Ball 1
@@ -113,7 +121,7 @@ void draw() {
   //FOR CHARACTER2 AND BALL2
   player2.up2();
   player2.down2();
-  player2.display();
+  player2.display(color(0, 0, 255));
 
   //falling off screen
   if (player2.position.y > height) {
