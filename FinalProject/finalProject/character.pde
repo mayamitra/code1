@@ -73,8 +73,8 @@ class Character {
     rect(position.x+21, position.y+44, 6, 42);
     //body
     //fill(0, 0, 255);
-    //fill(colorR, colorG, colorB);
-    fill(shirt);
+    fill(colorR, colorG, colorB);
+    //fill(shirt);
     rect(position.x, position.y+44, 36, 42);
     //midrif
     fill(150);

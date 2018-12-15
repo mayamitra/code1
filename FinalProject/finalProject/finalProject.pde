@@ -25,7 +25,7 @@ Star stars[] = new Star[20];
 
 PVector playPos [] = new PVector [2];
 
-boolean hit1;
+boolean hit1, hit2;
 
 void setup() {
   size(800, 600);
@@ -73,6 +73,12 @@ void draw() {
     player1.position.y = height;
   }
 
+  //make the color of the p2's shirt change if p2 gets hit
+  if (hit1 == true) {
+    //player2.display(color(255, 0, 0));
+    player2.shirtChange();
+  }
+
   for (int i=0; i<balls1.size(); i++) {
     Ball1 b1 = balls1.get(i);
     b1.display();
@@ -96,10 +102,6 @@ void draw() {
       hit1 = true;
       file.play();
     }
-  }
-
-  if (hit1 == true) {
-    player2.display(color(255,0,0));
   }
 
   //Score of Character 2, based on Ball 1
@@ -130,6 +132,12 @@ void draw() {
   if (player2.position.y < 0) {
     player2.position.y = height;
   }
+  
+  //make the color of the p1's shirt change if p1 gets hit
+  if (hit2 == true) {
+    //player1.display(color(255, 0, 0));
+    player1.shirtChange();
+  }
 
   for (int i=0; i<balls2.size(); i++) {
     Ball2 b2 = balls2.get(i);
@@ -150,7 +158,8 @@ void draw() {
       b2.position.y <= player1.position.y+107) {
       lives1 = lives1-=1;
       balls2.remove(i);
-      player1.shirtChange();
+      //player1.shirtChange();
+      hit2 = true;
       file.play();
     }
   }
